@@ -9,6 +9,11 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'mysql2', '>= 0.4.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
+gem 'bcrypt'
+gem 'active_model_serializers', '~> 0.10.10'
+gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+gem 'knock'
+gem 'jwt'
 gem 'rswag'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'

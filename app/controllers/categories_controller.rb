@@ -4,7 +4,6 @@ class CategoriesController < ApplicationController
   # GET /categories
   def index
     @categories = Category.all
-
     render json: @categories
   end
 
@@ -38,7 +37,10 @@ class CategoriesController < ApplicationController
     @category.destroy
   end
 
+ 
   private
+
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])

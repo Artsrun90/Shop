@@ -1,15 +1,21 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :update, :destroy]
-
+  before_action :authenticate_customer, only: [:index, :update]
+  before_action :authorize,             only: [:update]
+  before_action :authorize_as_admin,    only: [:destroy, :update, :show]
+  
   # GET /customers
   def index
-    @customers = Customer.all
-    render json: @customers
+    # @customers = Customer.all
+    current_customer.update!(last_login: Time.now)
+    render json: current_customer
+   
   end
 
+  
   # GET /customers/1
   def show
-    render json: @customer
+    @customer = Customer.all
+    render json: @customer    
   end
 
   # POST /customers
@@ -25,6 +31,7 @@ class CustomersController < ApplicationController
 
   # PATCH/PUT /customers/1
   def update
+    @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
       render json: @customer
     else
@@ -34,17 +41,25 @@ class CustomersController < ApplicationController
 
   # DELETE /customers/1
   def destroy
-    @customer.destroy
+    @customer = Customer.find(params[:id])
+    if @customer.destroy
+      render json: { status: 200, msg: 'Customer has been deleted.' }
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_customer
-      @customer = Customer.find(params[:id])
-    end
+    # def set_customer
+    #     @customer = Customer.find(params[:id])
+    # end
 
     # Only allow a trusted parameter "white list" through.
     def customer_params
-      params.require(:customer).permit(:customerName, :contactName, :address, :city, :postalCode, :country)
+      params.require(:customer).permit(:email, :password, :password_confirmation, :customerName, :contactName, :address, :city, :postalCode, :country)
     end
+
+    def authorize
+      return head(:unauthorized) unless current_customer && current_customer.can_modify_customer?(params[:id])
+    end
+
 end

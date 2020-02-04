@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 2020_02_01_132032) do
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customerName"
+    t.string "email", null: false
+    t.string "password_digest"
+    t.string "role", default: "user", null: false
+    t.datetime "last_login"
     t.string "contactName"
     t.string "address"
     t.string "city"
@@ -28,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_02_01_132032) do
     t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_customers_on_email"
   end
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

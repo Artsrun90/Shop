@@ -15,21 +15,30 @@
 #      country: Faker::Address.country
 #     )
 # end
-# 20.times do
-#     Category.create(
-#         categoryName: Faker::Food.dish,
-#         description:  Faker::Food.description, 
-#     )
-# end
-
 20.times do
-        Employee.create(
-         lastName: Faker::Name.name,
-         firstName:  Faker::Name.name, 
-         birthDay:  Faker::Date.birthday(min_age: 18, max_age: 65),
-         photo: Faker::Avatar.image, 
-         notes: Faker::Food.description
-        )
-    end
+    Category.create(
+        categoryName: Faker::Food.dish,
+        description:  Faker::Food.description, 
+    )
+end
 
+# 20.times do
+#         Employee.create(
+#          lastName: Faker::Name.name,
+#          firstName:  Faker::Name.name, 
+#          birthDay:  Faker::Date.birthday(min_age: 18, max_age: 65),
+#          photo: Faker::Avatar.image, 
+#          notes: Faker::Food.description
+#         )
+#     end
+
+        # 1.times do
+        #     Customer.create(
+        #         email: "superadmin@gmail",
+        #         password:  "superadmin", 
+        #         customerName: "superadmin",
+        #         role: "admin"
+            
+        #     )
+        # end
 
